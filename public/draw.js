@@ -1,8 +1,6 @@
 var cv;
 var cx;
 
-
-
 function gotData(x,y,c){
 	cx.fillStyle = c;
 	cx.fillRect(x-2,y-2,4,4);
