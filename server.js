@@ -40,14 +40,15 @@ sockIOconns.sockets.on('connection', function (socket) {
     socket.on('disconnect', function () {
 		if(typeof myClient === 'undefined') return;
         //me sterg din camera
-		if(typeof myClient.room !== 'undefined')
+		if(typeof myClient.room !== 'undefined'){
 			myClient.room.clients.remove(myClient);
-        //daca camera e goala o sterg din lista de camere
-        if (myClient.room.clients.length == 0) {
-            RIDs.remove(myClient.room.ID);
-            rooms.remove(myClient.room);
-			delete myClient.room;
-        }
+			//daca camera e goala o sterg din lista de camere
+			if (myClient.room.clients.length == 0) {
+				RIDs.remove(myClient.room.ID);
+				rooms.remove(myClient.room);
+				delete myClient.room;
+			}
+		}
         //imi sterg obiectul
         delete myClient;
     });
