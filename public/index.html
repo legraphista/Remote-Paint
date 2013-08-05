@@ -1,18 +1,13 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<meta charset="utf-8">
-		<script src="socket.io/socket.io.js"></script>
+		<meta charset="utf-8"><!--DOTO modifica adresa cand publici -->
+		<script src="http://localhost:8888/socket.io/socket.io.js"></script>
 		<script src="sock.js"></script>
 		<script src="draw.js"></script>
-		<script>
-			function setup(){
-				cv = document.getElementById('canv');
-				cx = cv.getContext("2d");
-			}
-			var color = "black";
+		<script src="extra.js"></script>
+		<script src="script.js"></script>
 
-		</script>
 		
 		<style>
 			#canv{
@@ -33,7 +28,7 @@
  
 		</style>
 	</head>
-	<body onLoad='setup();'>
+	<body>
 		
 		<canvas id='canv' height="500px" width="500px"></canvas>
 		<br>

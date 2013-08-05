@@ -12,7 +12,7 @@ module.exports = {
         var client = {};
         client.socket = socket;
         client.color = color;
-        clinet.lastPoint = createPoint(-1, -1);
+        client.lastPoint = {"x":-1,"y":-1};
         client.room = undefined;
         return client;
     },

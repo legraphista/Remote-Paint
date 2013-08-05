@@ -1,4 +1,4 @@
-var port = 888;
+var port = 8888;
 var socketIOLogLevel = 2;
 
 var heartbeat_interval = 10//25
@@ -31,18 +31,22 @@ sockIOconns.sockets.on('connection', function (socket) {
     socket.on('who', function (data) {
         //daca nu mai este setat deja
         if (typeof myClient === 'undefined') {
-            myClient = constructs.createClient(data.name, socket, createColor(0, 0, 0));
+            myClient = constructs.createClient(data.name, socket, constructs.createColor(0, 0, 0, 1));
+			socket.emit('nameSet');
         }
     });
 
 
     socket.on('disconnect', function () {
+		if(typeof myClient === 'undefined') return;
         //me sterg din camera
-        myClient.room.remove(myClient);
+		if(typeof myClient.room !== 'undefined')
+			myClient.room.clients.remove(myClient);
         //daca camera e goala o sterg din lista de camere
-        if (myClient.room.length == 0) {
-            RIDs.remove(room.ID);
+        if (myClient.room.clients.length == 0) {
+            RIDs.remove(myClient.room.ID);
             rooms.remove(myClient.room);
+			delete myClient.room;
         }
         //imi sterg obiectul
         delete myClient;
@@ -54,7 +58,8 @@ sockIOconns.sockets.on('connection', function (socket) {
             reason: reason
         });
         if (!didIt) {
-            socket.close();
+			sockets.remove(socket);
+            socket.disconnect('error');
         }
     }
 
@@ -64,30 +69,40 @@ sockIOconns.sockets.on('connection', function (socket) {
             didJoin(false, "Protocol nerespectat (e1)");
             return;
         }
+		
         //pt fiecare camera
         for (var i = 0; i < rooms.length; i++) {
             //daca gasim camera
             if (rooms[i].ID == data.ID) {
                 //daca parola e corecta
+				
                 if (rooms[i].password == data.password) {
                     rooms[i].clients.push(myClient);
                     myClient.room = rooms[i];
+					
                     didJoin(true, "");
                 } else {
                     //TODO trimite parola gresita
+					myClient.room = rooms[i];
                     didJoin(false, "Parola gresita");
+					
                 }
+				
                 return; //am incercat camera
             }
         }
-        //dupa ce am incercat toate camerele, crrem una noua
+        //dupa ce am incercat toate camerele, creem una noua
         //TODO crearea unei camere
+		
         var room = constructs.createRoom(data.password, assets.generateRID(RIDs));
         RIDs.push(room.ID);
-        room.push(myClient);
+        room.clients.push(myClient);
         myClient.room = room;
         rooms.push(room);
+		
         didJoin(true, "");
+		
+		console.log(rooms);
     });
 
     //  data.c - culoare ; data.p punct
