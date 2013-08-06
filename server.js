@@ -7,10 +7,16 @@ var close_timeout = 20;//60
 
 var io = require('socket.io');
 var connect = require('connect');
+
 var constructs = require('./scripts/constructors.js');
 var assets = require('./scripts/extra.js');
 
-var sockIOconns = io.listen(port, { log: true });
+var app = connect()
+			.use(connect.static('public'))
+			.use(connect.favicon('favicon.ico'))
+			.listen(port);
+
+var sockIOconns = io.listen(app, { log: true });
 //setup
 sockIOconns.set('log level', socketIOLogLevel);
 sockIOconns.set('sync disconnect on unload',true);
