@@ -1,3 +1,5 @@
+@import url('./input.css');
+
 body{
 	background: -webkit-radial-gradient(50px 50px,ellipse farthest-corner, #ADADAD,#000000);
 	background: 	-ms-radial-gradient(50px 50px,ellipse farthest-corner,#ADADAD,#000000);
@@ -106,4 +108,47 @@ div.color:active{
 33%  {-webkit-transform:rotate(180deg);}
 66%  {-webkit-transform:rotate(360deg);}
 100% {-webkit-transform:rotate(0deg);}
+}
+
+#bkmsg{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	z-index:10;
+	background-color: rgba(0,0,0,0.8); 
+}
+div.msg{
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:400px;
+	height:125px;
+	margin-top:-100px;
+	margin-left:-200px;
+	background-color: white;
+	box-shadow: 0px 0px 10px black;
+	border-radius: 15px;
+}
+
+img.loading{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-12px;
+	margin-left:-12px;
+}
+
+#div_setrid{
+	
+}
+#div_setname{
+	display:none;
+}
+#div_load{
+	display:none;
+}
+#div_setpass{
+	display:none;
 }

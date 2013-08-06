@@ -1,35 +1,136 @@
 var _name;
 var _rid;
 
+
+
 window.onload = function () {
 					cv = document.getElementById('canv');
 					cx = cv.getContext("2d");
 					clearCanvas();
-					var name = URLVars.name;
-					if(typeof name === 'undefined' || name == ''){
-						name = prompt('Numele tau:','').trim();
-						while(name == "" || typeof name === 'undefined')name = prompt('Numele tau:','').trim();
-					}						
 					
-					var isConnectedInterval = setInterval(function(){
+					document.getElementById('text_rid').onkeypress = function (e){
+						if (e.keyCode == 13){
+							document.getElementById('RID_OK').click();
+						}
+					}
+					document.getElementById('text_name').onkeypress = function (e){
+						if (e.keyCode == 13){
+							document.getElementById('NAME_OK').click();
+						}
+					}
+					document.getElementById('text_pass').onkeypress = function (e){
+						if (e.keyCode == 13){
+							document.getElementById('PASS_OK').click();
+						}
+					}
+					
+					
+					getRID();					
+				}	
+
+
+function getRID(){
+	if(URLVars.rid){
+		_rid = URLVars.rid;
+		
+		getName();
+	}else{
+		document.getElementById("text_rid").focus();
+		document.getElementById("RID_OK").onclick = function(){
+			_rid = document.getElementById("text_rid").value;
+			
+			getName();
+		}
+	}
+}			
+				
+function getName(){
+	document.getElementById("div_setrid").style.display = "none";
+	
+	_name = URLVars.name;
+	if(typeof _name === 'undefined'){
+		document.getElementById("div_setname").style.display = "block";
+		document.getElementById("text_name").focus();
+		
+		document.getElementById("NAME_OK").onclick = function(){
+			_name = document.getElementById("text_name").value;
+			if(_name.trim() != ''){
+				checkConnectionAndIfHasPass()
+			}
+		}
+	}else{
+		checkConnectionAndIfHasPass();
+	}
+	
+}
+
+function checkConnectionAndIfHasPass(){
+	document.getElementById("div_setrid").style.display = "none";
+	document.getElementById("div_setname").style.display = "none";
+	document.getElementById("div_load").style.display = "block";
+	
+	var nameSet = false;
+	socket.on('nameSet', function(){
+		 nameSet = true;
+	});
+	
+	var isConnectedInterval = setInterval(function(){//check for connectivity
 						if(socket.socket.connected){
-							setName(name);
-							_name = name;
+							
+							setName(_name);
+							roomHasPass(_rid);//check for password
+							
+								var hasPassInterval = setInterval(function(){//check for pass
+									if(gotRoomPassMSG && nameSet){
+										document.getElementById("div_load").style.display = "none";
+										if(roomHasPassword){
+											getPass();
+										}else{
+											enterRoom(_rid,"");
+										}
+										
+										window.clearInterval(hasPassInterval);
+									}
+								},100);
+							
 							window.clearInterval(isConnectedInterval);
 						}
-					},1000);
-					
-				}	
-					
-socket.on('nameSet', function(){
-	alert('nume setat');
-	pass = (prompt('parola:','') || "").trim();
-	enterRoom(URLVars.rid || prompt('RoomID:','').trim() || "",pass || "");
+					},100);
+
 	
-});
+}
+
+function getPass(){
+	document.getElementById("div_setpass").style.display = "block";
+	document.getElementById("text_pass").focus();
+	document.getElementById("PASS_OK").onclick = function (){
+		var pass = document.getElementById("text_pass").value;
+		enterRoom(_rid,pass);
+	}
+										
+	
+}
 
 socket.on('didJoin', function(data){
-	alert(data.ID + " " +data.success + ' ' + data.reason);
 	_rid = data.ID;
-	window.location.hash = "#rid="+_rid;
+	window.location.hash = "#rid="+ _rid + "&name=" + _name ;
+	if(!data.success){
+		alert(data.reason);
+		document.location.reload(true);
+	}else{
+		finishQ();
+	}
 });
+
+function finishQ(){
+	document.getElementById("div_setpass").style.display = "none";
+	document.getElementById("bkmsg").style.display = "none";
+}
+
+
+
+				
+
+
+
+

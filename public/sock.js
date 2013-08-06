@@ -21,3 +21,16 @@ socket.on('get', function (data){
 
 	gotData(data.p,data.lp,data.c);
 });
+
+var roomfound;
+var roomHasPassword;
+var gotRoomPassMSG = false;
+
+function roomHasPass(rid){
+	socket.emit('haspass',{"ID":rid});
+	socket.on('roomPass', function (data){
+		roomfound = data.RF;
+		roomHasPassword = data.HP;
+		gotRoomPassMSG = true;
+	});
+}

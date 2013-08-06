@@ -64,6 +64,21 @@ sockIOconns.sockets.on('connection', function (socket) {
         }
     }
 
+	socket.on('haspass', function(data){
+		var roomfound = false;
+		var hasPass = true;
+		for (var i = 0; i < rooms.length; i++){
+			if (rooms[i].ID == data.ID){
+				roomfound = true;
+				if(rooms[i].password == ''){
+					hasPass = false;
+				}
+			}
+		}
+		myClient.socket.emit('roomPass',{"RF":roomfound,
+										 "HP":hasPass});
+	});
+	
     socket.on('enterRoom', function (data) {
         if (typeof myClient === 'undefined') {
             // protocol violation
