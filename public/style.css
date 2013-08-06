@@ -1,5 +1,8 @@
 body{
-	background-color:#e3e3e3;
+	background: -webkit-radial-gradient(50px 50px,ellipse farthest-corner, #ADADAD,#000000);
+	background: 	-ms-radial-gradient(50px 50px,ellipse farthest-corner,#ADADAD,#000000);
+	background:    -moz-radial-gradient(50px 50px,ellipse farthest-corner,#ADADAD,#000000);
+	background: 	    radial-gradient(50px 50px,ellipse farthest-corner, #ADADAD,#000000);
 }
 
 #canv{
@@ -10,13 +13,18 @@ body{
 	position:absolute;
 	top:50%;
 	left:50%;
-	margin-top:-250px;
-	margin-left:-250px;
+	margin-top:-300px;
+	margin-left:-275px;
 	
-	height:500px;
-	width:500px;
+	height:550px;
+	width:550px;
 	box-shadow: 0px 0px 50px black;
-	background-color:#ffffff;
+	
+	background: -webkit-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
+	background:    	-ms-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
+	background:    -moz-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
+	background: 	    radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
+
 }
 div.colorContainer{
 	position:absolute;
@@ -27,6 +35,26 @@ div.colorContainer{
 	width:100%;
 	text-align:center;
 	z-index:1;
+	
+	background: -webkit-radial-gradient(50px 50px,circle farthest-corner, rgba(100,100,100,0.3), rgba(70,70,70,0.2));
+	background:    	-ms-radial-gradient(50px 50px,circle farthest-corner, rgba(150,150,150,0.3), rgba(70,70,70,0.2));
+	background:    -moz-radial-gradient(50px 50px,circle farthest-corner, rgba(150,150,150,0.3), rgba(70,70,70,0.2));
+	background: 	    radial-gradient(50px 50px,circle farthest-corner, rgba(150,150,150,0.3), rgba(70,70,70,0.2));
+	
+}
+div.none_line{
+	position:relative;
+	top:50%;
+	left:0px;
+	width:45px;
+	height:3px;
+	background:rgba(255, 0, 0, 0.8);
+	transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	margin-left:-8px;
+	margin-top:-2px;
 }
 div.color{
 	height:30px;
@@ -37,7 +65,8 @@ div.color{
 	border:0px;
 	padding:0px;
 	display:inline-block;
-	
+	margin-top:5px;
+	overflow:hidden;
 }
 
 div.color:hover{
