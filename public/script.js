@@ -113,9 +113,10 @@ function getPass(){
 
 socket.on('didJoin', function(data){
 	_rid = data.ID;
-	window.location.hash = "#rid="+ _rid + "&name=" + _name ;
+	window.location.hash = "#rid="+ _rid;
 	if(!data.success){
 		alert(data.reason);
+		window.location.hash = "#rid="+ _rid + "&name=" + _name;
 		document.location.reload(true);
 	}else{
 		finishQ();
@@ -127,7 +128,16 @@ function finishQ(){
 	document.getElementById("bkmsg").style.display = "none";
 }
 
-
+function shareRoom(){
+	document.getElementById("bkmsg").style.display = "block";
+	document.getElementById("div_shared").style.display = "block";
+	document.getElementById("_pShare").innerHTML = "stefandev.net:8888/#rid="+_rid;
+	
+	document.getElementById("SHARE_OK").onclick = function(){
+		document.getElementById("div_shared").style.display = "none";
+		document.getElementById("bkmsg").style.display = "none";
+	}
+}
 
 				
 
