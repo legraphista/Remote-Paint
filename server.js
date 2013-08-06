@@ -115,7 +115,7 @@ sockIOconns.sockets.on('connection', function (socket) {
                 return;
                 //invalid data
             } else {
-                toSend.c = constructs.createColor(data.c.r, data.c.g, data.c.b, data.c.a);
+                toSend.c = data.c;
             }
         }
         if (typeof data.p !== undefined) {
@@ -142,9 +142,7 @@ sockIOconns.sockets.on('connection', function (socket) {
             if (!neighbours[i] || typeof neighbours[i] === 'undefined') continue;
             //daca socketul este deconectat
             if (neighbours[i].disconnected == true) continue;
-            //daca sunt eu
-            if (neighbours[i] === myClient.socket) continue;
-
+            
             neighbours[i].socket.emit('get', toSend);
 
         }
