@@ -23,7 +23,7 @@ window.onload = function () {
 					
 socket.on('nameSet', function(){
 	alert('nume setat');
-	pass = prompt('parola:','').trim();
+	pass = (prompt('parola:','') || "").trim();
 	enterRoom(URLVars.rid || prompt('RoomID:','').trim() || "",pass || "");
 	
 });

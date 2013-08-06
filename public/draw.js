@@ -32,8 +32,10 @@ document.onmouseup=function(){
 	mouseDwn=false
 };
 document.onmousemove=function(e){
-	if(mouseDwn){
-		var p = createPoint(e.offsetX,e.offsetY);
+	if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
+		var x = e.offsetX==undefined?e.layerX:e.offsetX;
+		var y = e.offsetY==undefined?e.layerY:e.offsetY;
+		var p = createPoint(x,y);
 		send(p,lp,color);
 		lp = p;
 	}

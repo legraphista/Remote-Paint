@@ -18,5 +18,6 @@ function send(p,lp,c){
 }
 
 socket.on('get', function (data){
+
 	gotData(data.p,data.lp,data.c);
 });

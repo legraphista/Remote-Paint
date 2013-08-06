@@ -108,6 +108,9 @@ sockIOconns.sockets.on('connection', function (socket) {
 
     //  data.c - culoare ; data.p punct
     socket.on('push', function (data) {
+		if(typeof myClient === 'undefined') return;
+		if(typeof myClient.room === 'undefined') return;
+	
         //reconstruim datele pt validare
         var toSend = {};
         if (typeof data.c !== undefined) {
