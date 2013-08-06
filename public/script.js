@@ -4,7 +4,7 @@ var _rid;
 window.onload = function () {
 					cv = document.getElementById('canv');
 					cx = cv.getContext("2d");
-					
+					clearCanvas();
 					var name = URLVars.name;
 					if(typeof name === 'undefined' || name == ''){
 						name = prompt('Numele tau:','').trim();
