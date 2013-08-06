@@ -27,10 +27,7 @@ button.button:hover {
 	background: gradient( linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #ffffff) );
 	background-color:#ededed;
 }
-button.button:active {
-	position:relative;
-	top:1px;
-}
+
 
 input[type=text],input[type=password]{
 	border:2px solid #ADADAD;

@@ -131,7 +131,7 @@ function finishQ(){
 function shareRoom(){
 	document.getElementById("bkmsg").style.display = "block";
 	document.getElementById("div_shared").style.display = "block";
-	document.getElementById("_pShare").innerHTML = "stefandev.net:8888/#rid="+_rid;
+	document.getElementById("_pShare").innerHTML = window.location.href;
 	
 	document.getElementById("SHARE_OK").onclick = function(){
 		document.getElementById("div_shared").style.display = "none";

@@ -42,7 +42,20 @@ sockIOconns.sockets.on('connection', function (socket) {
         }
     });
 
-
+	socket.on('sendClear', function(){
+		if(typeof myClient === 'undefined') return;
+		if(typeof myClient.room === 'undefined') return;
+		
+		var neighbours = myClient.room.clients;
+			for (var i = 0; i < neighbours.length; i++) {
+				//daca socketul e nul
+				if (!neighbours[i] || typeof neighbours[i] === 'undefined') continue;
+				//daca socketul este deconectat
+				if (neighbours[i].disconnected == true) continue;
+				neighbours[i].socket.emit('clearCanvas',{});
+			}
+	});
+	
     socket.on('disconnect', function () {
 		if(typeof myClient === 'undefined') return;
         //me sterg din camera

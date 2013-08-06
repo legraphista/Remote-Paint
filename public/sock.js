@@ -10,6 +10,13 @@ function enterRoom(rid,pass)
 	socket.emit('enterRoom',{"ID":rid, "password":pass});
 }
 
+function sendClear(){
+	socket.emit('sendClear',{});
+}
+socket.on('clearCanvas', function(){
+	clearCanvas();
+});
+
 function send(p,lp,c){
 	socket.emit('push',{"p":p,
 						"lp":lp,
