@@ -25,7 +25,23 @@ module.exports = {
             }
         } while (RIDs.indexOf(rid) != -1);
         return rid;
-    }
+    },
+	
+	compColors: function (c1,c2){
+		if(c1.r != c2.r) return false;
+		if(c1.g != c2.g) return false;
+		if(c1.b != c2.b) return false;
+		if(c1.a != c2.a) return false;
+		return true
+	},
+	isColor: function (c){
+	
+		if(typeof c.r === 'undefined') return false;
+		if(typeof c.g === 'undefined') return false;
+		if(typeof c.b === 'undefined') return false;
+		if(typeof c.a === 'undefined') return false;		
+		return true;
+	}
 }
 //extensie pt math ransom
 function random (min, max){

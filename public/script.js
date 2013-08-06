@@ -59,6 +59,7 @@ function getName(){
 			}
 		}
 	}else{
+		
 		checkConnectionAndIfHasPass();
 	}
 	
@@ -72,16 +73,18 @@ function checkConnectionAndIfHasPass(){
 	var nameSet = false;
 	socket.on('nameSet', function(){
 		 nameSet = true;
+		 
 	});
 	
 	var isConnectedInterval = setInterval(function(){//check for connectivity
-						if(socket.socket.connected){
+						if(!socket.socket.connecting){
 							
 							setName(_name);
 							roomHasPass(_rid);//check for password
 							
 								var hasPassInterval = setInterval(function(){//check for pass
 									if(gotRoomPassMSG && nameSet){
+									
 										document.getElementById("div_load").style.display = "none";
 										if(roomHasPassword){
 											getPass();
@@ -126,6 +129,7 @@ socket.on('didJoin', function(data){
 function finishQ(){
 	document.getElementById("div_setpass").style.display = "none";
 	document.getElementById("bkmsg").style.display = "none";
+	refreshNameList();
 }
 
 function shareRoom(){
@@ -136,6 +140,20 @@ function shareRoom(){
 	document.getElementById("SHARE_OK").onclick = function(){
 		document.getElementById("div_shared").style.display = "none";
 		document.getElementById("bkmsg").style.display = "none";
+	}
+}
+
+function buildNameList(data){
+	var list = document.getElementById('nList');
+	list.innerHTML ='';
+	var template = '<div class="listItem">\
+			<div class="listItemColor" style="background:%color%"></div>\
+			<p class="listItemText">%text%</p>\
+		</div>';
+	for(var i = 0; i < data.length; i++){
+		var toadd = template.replace('%text%',data[i].name);
+		toadd = toadd.replace('%color%',parseColor(data[i].color));
+		list.innerHTML += toadd;
 	}
 }
 

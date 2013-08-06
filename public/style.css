@@ -16,7 +16,7 @@ body{
 	top:50%;
 	left:50%;
 	margin-top:-300px;
-	margin-left:-275px;
+	margin-left:-175px;
 	
 	height:550px;
 	width:550px;
@@ -27,6 +27,41 @@ body{
 	background:    -moz-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
 	background: 	    radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
 
+}
+div.nameList{
+	position:absolute;
+	top:0px;
+	left:0px;
+	height:100%;
+	width:200px;
+	background-color:rgba(255,255,255,0.9);
+	z-index:2;
+}
+div.listItem{
+	height:25px;
+	width:200px;
+	z-index:3;
+}
+div.listItemColor{
+	position:relative;
+	top:0;
+	left:0;
+	margin-top:2px;
+	margin-left:2px;
+	height:20px;
+	width:20px
+}
+p.listItemText{
+	vertical-align:middle;
+	text-align:left;
+	position:relative;
+	top:0;
+	margin:0px;
+	left:25px;
+	width:165px;
+	height:25px;
+	margin-top: -20px;
+	margin-left:5px;
 }
 
 div.share{
@@ -40,7 +75,7 @@ div.share{
 	width:200px;
 	height:25px;
 	margin-top:+250px;
-	margin-left:-275px;
+	margin-left:-175px;
 	
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;

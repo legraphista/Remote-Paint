@@ -144,7 +144,7 @@ sockIOconns.sockets.on('connection', function (socket) {
     socket.on('push', function (data) {
 		if(typeof myClient === 'undefined') return;
 		if(typeof myClient.room === 'undefined') return;
-	
+
         //reconstruim datele pt validare
         var toSend = {};
         if (typeof data.c !== undefined) {
@@ -171,7 +171,11 @@ sockIOconns.sockets.on('connection', function (socket) {
                 toSend.lp = constructs.createPoint(data.lp.x, data.lp.y);
             }
         }
-
+		
+		if(!assets.compColors(myClient.color,data.c)){
+			sendNameList(data.c);
+		}
+		myClient.color = data.c;
 
         var neighbours = myClient.room.clients;
         for (var i = 0; i < neighbours.length; i++) {
@@ -184,4 +188,42 @@ sockIOconns.sockets.on('connection', function (socket) {
 
         }
     });
+	
+	socket.on('getNameList', sendNameList);
+	
+	function sendNameList(c){
+		if(typeof myClient === 'undefined') return;
+		if(typeof myClient.room === 'undefined') return;
+	console.log('refresh req');
+		var nameArr = [];
+		var neighbours = myClient.room.clients;
+        for (var i = 0; i < neighbours.length; i++) {
+            //daca socketul e nul
+            if (!neighbours[i] || typeof neighbours[i] === 'undefined') continue;
+            //daca socketul este deconectat
+            if (neighbours[i].disconnected == true) continue;
+            
+			
+			
+			if(neighbours[i] == myClient && assets.isColor(c)){
+				var NC = {"name": neighbours[i].name,
+					  "color":c};
+			}else{
+				var NC = {"name": neighbours[i].name,
+					  "color":neighbours[i].color};
+			}
+			
+			nameArr.push(NC);
+
+        }
+		
+		 for (var i = 0; i < neighbours.length; i++) {
+			//daca socketul e nul
+			if (!neighbours[i] || typeof neighbours[i] === 'undefined') continue;
+			//daca socketul este deconectat
+			if (neighbours[i].disconnected == true) continue;
+			
+			neighbours[i].socket.emit('nameList', nameArr);
+		}
+	}
 });

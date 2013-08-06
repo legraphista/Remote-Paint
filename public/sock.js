@@ -23,6 +23,12 @@ function send(p,lp,c){
 						"c":c}
 				);
 }
+function refreshNameList(){
+	socket.emit('getNameList',{});
+}
+socket.on('nameList', function(data){
+	buildNameList(data);
+});
 
 socket.on('get', function (data){
 

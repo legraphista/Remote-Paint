@@ -10,8 +10,13 @@ module.exports = {
 
     createClient: function (name, socket, color) {
         var client = {};
+		client.name = name;
         client.socket = socket;
         client.room = undefined;
+		client.color = {"r":0,
+						"g":0,
+						"b":0,
+						"a":1};
         return client;
     },
 
