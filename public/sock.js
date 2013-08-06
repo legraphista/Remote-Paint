@@ -10,10 +10,13 @@ function enterRoom(rid,pass)
 	socket.emit('enterRoom',{"ID":rid, "password":pass});
 }
 
-function send(x,y,c){
-	socket.emit('push',{"x":x, "y":y, "c":c});
+function send(p,lp,c){
+	socket.emit('push',{"p":p,
+						"lp":lp,
+						"c":c}
+				);
 }
 
 socket.on('get', function (data){
-	gotData(data.x,data.y,data.c);
+	gotData(data.p,data.lp,data.c);
 });

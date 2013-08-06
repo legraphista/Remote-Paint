@@ -24,7 +24,6 @@ window.onload = function () {
 socket.on('nameSet', function(){
 	alert('nume setat');
 	pass = prompt('parola:','').trim();
-	while(pass == "" || typeof pass === 'undefined')pass = prompt('parola:','').trim();
 	enterRoom(URLVars.rid || prompt('RoomID:','').trim() || "",pass || "");
 	
 });

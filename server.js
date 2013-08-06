@@ -126,6 +126,14 @@ sockIOconns.sockets.on('connection', function (socket) {
                 toSend.p = constructs.createPoint(data.p.x, data.p.y);
             }
         }
+		if (typeof data.lp !== undefined) {
+            if (data.lp.x === undefined || data.lp.y === undefined) {
+                return;
+                //invalid data
+            } else {
+                toSend.lp = constructs.createPoint(data.lp.x, data.lp.y);
+            }
+        }
 
 
         var neighbours = myClient.room.clients;
@@ -137,7 +145,7 @@ sockIOconns.sockets.on('connection', function (socket) {
             //daca sunt eu
             if (neighbours[i] === myClient.socket) continue;
 
-            neighbours[i].emit('get', toSend);
+            neighbours[i].socket.emit('get', toSend);
 
         }
     });

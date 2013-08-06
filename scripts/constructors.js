@@ -11,8 +11,6 @@ module.exports = {
     createClient: function (name, socket, color) {
         var client = {};
         client.socket = socket;
-        client.color = color;
-        client.lastPoint = {"x":-1,"y":-1};
         client.room = undefined;
         return client;
     },
