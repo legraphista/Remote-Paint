@@ -61,6 +61,7 @@ sockIOconns.sockets.on('connection', function (socket) {
         //me sterg din camera
 		if(typeof myClient.room !== 'undefined'){
 			myClient.room.clients.remove(myClient);
+			sendNameList('');
 			//daca camera e goala o sterg din lista de camere
 			if (myClient.room.clients.length == 0) {
 				RIDs.remove(myClient.room.ID);
@@ -114,7 +115,6 @@ sockIOconns.sockets.on('connection', function (socket) {
                 if (rooms[i].password == data.password) {
                     rooms[i].clients.push(myClient);
                     myClient.room = rooms[i];
-					
                     didJoin(true, "");
                 } else {
                     //TODO trimite parola gresita

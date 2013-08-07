@@ -98,9 +98,9 @@ div.colorContainer{
 	position:absolute;
 	top:100%;
 	margin-top: -40px;
-	left:100px;
+	left:200px;
 	height:40px;
-	width:100%;
+	width:calc(100% - 200px);
 	text-align:center;
 	z-index:1;
 	
