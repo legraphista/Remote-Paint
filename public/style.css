@@ -8,7 +8,7 @@ body{
 }
 
 #canv{
-	border:1px black;
+	border:1px solid black;
 	margin:0px;
 	padding:0px;
 	
@@ -49,7 +49,8 @@ div.listItemColor{
 	margin-top:2px;
 	margin-left:2px;
 	height:20px;
-	width:20px
+	width:20px;
+	border:1px solid black;
 }
 p.listItemText{
 	vertical-align:middle;
@@ -97,7 +98,7 @@ div.colorContainer{
 	position:absolute;
 	top:100%;
 	margin-top: -40px;
-	left:0px;
+	left:100px;
 	height:40px;
 	width:100%;
 	text-align:center;
