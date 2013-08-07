@@ -8,7 +8,6 @@ body{
 }
 
 #canv{
-	border:1px solid black;
 	margin:0px;
 	padding:0px;
 	
@@ -63,6 +62,35 @@ p.listItemText{
 	height:25px;
 	margin-top: -20px;
 	margin-left:5px;
+}
+
+div.savePng{
+	background-color:white;
+	margin:0px;
+	padding:0px;
+	
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:200px;
+	height:25px;
+	margin-top:+250px;
+	margin-left:+175px;
+	
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	box-shadow: 0px 0px 50px black;
+}
+p.savePng{
+	margin-top:0px;
+	margin-left:25px;
+	color:blue;
+}
+p.savePng:active{
+	cursor:pointer;
+}
+p.savePng:hover{
+	cursor:pointer;
 }
 
 div.share{

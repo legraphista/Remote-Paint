@@ -4,6 +4,12 @@ var lp = createPoint(-1,-1);
 var color = createColorRGBA(0,0,0,1);
 var lineW = 4;
 
+function SavePNG(){
+	//adresa aici
+	var cs = new CanvasSaver('http://stefandev.net:8889/saveImg.php')
+	cs.savePNG(cv,'img');
+}
+
 function gotData(_p,_lp,c){
 	cx.fillStyle = parseColor(c);
 	cx.strokeStyle = parseColor(c);

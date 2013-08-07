@@ -5,6 +5,7 @@
 		<script src="http://localhost:8888/socket.io/socket.io.js"></script>
 		<script src="sock.js"></script>
 		<script src="draw.js"></script>
+		<script src="canvasSave.js"></script>
 		<script src="extra.js"></script>
 		<script src="script.js"></script>
 		<title>Remote-Paint</title>
@@ -35,6 +36,9 @@
 	
 	<div class="share">
 		<p class="share" onclick="shareRoom()">Invită</p>
+	</div>
+	<div class="savePng">
+		<p class="savePng" onclick="SavePNG()">Salvează imaginea</p>
 	</div>
 	<canvas id='canv' height="550px" width="550px"></canvas>
 	
