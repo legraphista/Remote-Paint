@@ -83,7 +83,8 @@ div.savePng{
 }
 p.savePng{
 	margin-top:0px;
-	margin-left:25px;
+	margin-right:25px;
+	text-align:right;
 	color:blue;
 }
 p.savePng:active{

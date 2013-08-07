@@ -1,6 +1,6 @@
 var _name;
 var _rid;
-
+var finishedAsking = false;
 
 
 window.onload = function () {
@@ -130,9 +130,11 @@ function finishQ(){
 	document.getElementById("div_setpass").style.display = "none";
 	document.getElementById("bkmsg").style.display = "none";
 	refreshNameList();
+	finishedAsking = true;
 }
 
 function shareRoom(){
+	finishedAsking = false;
 	document.getElementById("bkmsg").style.display = "block";
 	document.getElementById("div_shared").style.display = "block";
 	document.getElementById("_pShare").innerHTML = window.location.href;
@@ -140,6 +142,7 @@ function shareRoom(){
 	document.getElementById("SHARE_OK").onclick = function(){
 		document.getElementById("div_shared").style.display = "none";
 		document.getElementById("bkmsg").style.display = "none";
+		finishedAsking = true;
 	}
 }
 

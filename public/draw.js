@@ -4,6 +4,7 @@ var lp = createPoint(-1,-1);
 var color = createColorRGBA(0,0,0,1);
 var lineW = 4;
 
+
 function SavePNG(){
 	//adresa aici
 	var cs = new CanvasSaver('http://stefandev.net:8889/saveImg.php')
@@ -35,7 +36,7 @@ document.onmousedown=function(){
 	lp = createPoint(-1,-1);
 };
 document.onmouseup=function(){
-	mouseDwn=false
+	mouseDwn=false;
 };
 document.onmousemove=function(e){
 	if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
@@ -46,6 +47,43 @@ document.onmousemove=function(e){
 		lp = p;
 	}
 }
+
+//TOUCH SUPPORT
+document.addEventListener('touchstart', function(e){ 
+	var x = event.touches[0].pageX - cv.offsetLeft;
+	var y = event.touches[0].pageY - cv.offsetTop;
+	
+	
+	
+	if(x >= 0 && y >= 0 && x <= 550 && y <= 550 && finishedAsking && event.touches.length == 1)
+	{	
+		e.preventDefault(); 
+		mouseDwn=true;
+		lp = createPoint(-1,-1);
+		return true;
+	}
+	return true;
+	 
+});
+document.addEventListener('touchend',function(event) {
+	mouseDwn=false;
+	return true;
+});
+window.addEventListener('touchmove',function(e) {
+	var x = event.touches[0].pageX - cv.offsetLeft;
+	var y = event.touches[0].pageY - cv.offsetTop;
+	if(x >= 0 && y >= 0 && x <= 550 && y <= 550){
+		if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
+			var p = createPoint(x,y);
+			send(p,lp,color);
+			lp = p;
+			return false;
+		}
+	}
+	return true;
+});
+///////////////
+
 
 function clearCanvas()
 {
