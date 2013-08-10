@@ -17,10 +17,11 @@ socket.on('clearCanvas', function(){
 	clearCanvas();
 });
 
-function send(p,lp,c){
+function send(p,lp,c,w){
 	socket.emit('push',{"p":p,
 						"lp":lp,
-						"c":c}
+						"c":c,
+						"w":w}
 				);
 }
 function refreshNameList(){
@@ -32,7 +33,7 @@ socket.on('nameList', function(data){
 
 socket.on('get', function (data){
 
-	gotData(data.p,data.lp,data.c);
+	gotData(data.p,data.lp,data.c,data.w);
 });
 
 var roomfound;

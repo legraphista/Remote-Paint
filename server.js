@@ -137,10 +137,10 @@ sockIOconns.sockets.on('connection', function (socket) {
 		
         didJoin(true, "");
 		
-		console.log(rooms);
+		
     });
 
-    //  data.c - culoare ; data.p punct
+    //  data.c - culoare ; data.p punct ; data.lp punct anterior ; data.w latimeLinie
     socket.on('push', function (data) {
 		if(typeof myClient === 'undefined') return;
 		if(typeof myClient.room === 'undefined') return;
@@ -171,6 +171,14 @@ sockIOconns.sockets.on('connection', function (socket) {
                 toSend.lp = constructs.createPoint(data.lp.x, data.lp.y);
             }
         }
+		if (typeof data.w !== undefined){
+			if(isNaN(data.w)){
+				data.w = 2;
+			}
+		}else{
+			data.w = 2;
+		}
+		toSend.w = data.w;
 		
 		if(!assets.compColors(myClient.color,data.c)){
 			sendNameList(data.c);
@@ -194,7 +202,7 @@ sockIOconns.sockets.on('connection', function (socket) {
 	function sendNameList(c){
 		if(typeof myClient === 'undefined') return;
 		if(typeof myClient.room === 'undefined') return;
-	console.log('refresh req');
+	
 		var nameArr = [];
 		var neighbours = myClient.room.clients;
         for (var i = 0; i < neighbours.length; i++) {

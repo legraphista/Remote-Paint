@@ -4,6 +4,12 @@ var lp = createPoint(-1,-1);
 var color = createColorRGBA(0,0,0,1);
 var lineW = 4;
 
+var pxMoved = 0;
+
+function dist (p1,p2){
+	return Math.sqrt((p1.x - p2.x)*(p1.x - p2.x) + 
+					 (p1.y - p2.y)*(p1.y - p2.y));
+}
 
 function SavePNG(){
 	//adresa aici
@@ -11,29 +17,49 @@ function SavePNG(){
 	cs.savePNG(cv,'img');
 }
 
-function gotData(_p,_lp,c){
+function gotData(_p,_lp,c,w){
 	cx.fillStyle = parseColor(c);
 	cx.strokeStyle = parseColor(c);
-	cx.lineWidth = lineW;
+	cx.lineWidth = w;
 	if(_lp.x == -1 && _lp.y == -1){
-		cx.fillRect(_p.x - lineW/2.0,
-					_p.y - lineW/2.0,
-					lineW,
-					lineW);
+		//cx.fillRect(_p.x - lineW/2.0,
+		//			_p.y - lineW/2.0,
+		//			lineW,
+		//			lineW);
+		cx.beginPath();		
+		cx.arc(_p.x, _p.y, w/2.0, 0, 2 * Math.PI, false);
+		cx.fillStyle = c;
+		cx.fill();
 	}else{
 		cx.beginPath();
 		cx.moveTo(_lp.x, _lp.y);
 		cx.lineTo(_p.x, _p.y);
 		cx.stroke();
+		
+		cx.arc(_p.x, _p.y, w/2.0, 0, 2 * Math.PI, false);
+		cx.fillStyle = c;
+		cx.fill();
+		
+		cx.arc(_lp.x, _lp.y, w/2.0, 0, 2 * Math.PI, false);
+		cx.fillStyle = c;
+		cx.fill();
 	}
 	
 }
 
 var mouseDwn = false;
 
-document.onmousedown=function(){
+document.onmousedown=function(e){
 	mouseDwn=true;
 	lp = createPoint(-1,-1);
+	pxMoved = 0;
+	if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
+		var x = e.offsetX || e.layerX;
+		var y = e.offsetY || e.layerY;
+		var p = createPoint(x,y);
+		send(p,lp,color);
+		lp = p;
+	}
 };
 document.onmouseup=function(){
 	mouseDwn=false;
@@ -43,8 +69,12 @@ document.onmousemove=function(e){
 		var x = e.offsetX || e.layerX;
 		var y = e.offsetY || e.layerY;
 		var p = createPoint(x,y);
-		send(p,lp,color);
-		lp = p;
+		pxMoved++;
+		if(pxMoved > 5 || dist(p,lp) > 5){
+			send(p,lp,color,lineW);
+			lp = p;
+			pxMoved = 0;
+		}
 	}
 }
 
@@ -60,6 +90,13 @@ document.addEventListener('touchstart', function(e){
 		e.preventDefault(); 
 		mouseDwn=true;
 		lp = createPoint(-1,-1);
+		if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
+			var x = e.offsetX || e.layerX;
+			var y = e.offsetY || e.layerY;
+			var p = createPoint(x,y);
+			send(p,lp,color);
+			lp = p;
+		}
 		return true;
 	}
 	return true;
@@ -75,8 +112,12 @@ window.addEventListener('touchmove',function(e) {
 	if(x >= 0 && y >= 0 && x <= 550 && y <= 550){
 		if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
 			var p = createPoint(x,y);
-			send(p,lp,color);
-			lp = p;
+			pxMoved++;
+			if(pxMoved > 5 || dist(p,lp) > 5){
+				send(p,lp,color,lineW);
+				lp = p;
+				pxMoved = 0;
+			}
 			return false;
 		}
 	}
