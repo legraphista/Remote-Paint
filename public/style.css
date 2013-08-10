@@ -14,11 +14,11 @@ body{
 	position:absolute;
 	top:50%;
 	left:50%;
-	margin-top:-300px;
-	margin-left:-175px;
+	margin-top:-275px;
+	margin-left:-150px;
 	
-	height:550px;
-	width:550px;
+	height:500px;
+	width:500px;
 	box-shadow: 0px 0px 50px black;
 	
 	background: -webkit-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
@@ -74,8 +74,8 @@ div.savePng{
 	left:50%;
 	width:200px;
 	height:25px;
-	margin-top:+250px;
-	margin-left:+175px;
+	margin-top:+225px;
+	margin-left:+150px;
 	
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
@@ -104,8 +104,8 @@ div.share{
 	left:50%;
 	width:200px;
 	height:25px;
-	margin-top:+250px;
-	margin-left:-175px;
+	margin-top:+225px;
+	margin-left:-150px;
 	
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
@@ -121,88 +121,6 @@ p.share:active{
 }
 p.share:hover{
 	cursor:pointer;
-}
-
-div.colorContainer{
-	position:absolute;
-	top:100%;
-	margin-top: -40px;
-	left:200px;
-	height:40px;
-	width:calc(100% - 200px);
-	text-align:center;
-	z-index:1;
-	
-	background: -webkit-radial-gradient(50px 50px,circle farthest-corner, rgba(100,100,100,0.3), rgba(70,70,70,0.2));
-	background:    	-ms-radial-gradient(50px 50px,circle farthest-corner, rgba(150,150,150,0.3), rgba(70,70,70,0.2));
-	background:    -moz-radial-gradient(50px 50px,circle farthest-corner, rgba(150,150,150,0.3), rgba(70,70,70,0.2));
-	background: 	    radial-gradient(50px 50px,circle farthest-corner, rgba(150,150,150,0.3), rgba(70,70,70,0.2));
-	
-}
-div.none_line{
-	position:relative;
-	top:50%;
-	left:0px;
-	width:45px;
-	height:3px;
-	background:rgba(255, 0, 0, 0.8);
-	transform: rotate(45deg);
-	-moz-transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	-o-transform: rotate(45deg);
-	margin-left:-8px;
-	margin-top:-2px;
-}
-div.color{
-	height:30px;
-	width:30px;
-	border:1px dotted black;
-	box-shadow: 0px 0px 10px black;
-	margin:0px;
-	border:0px;
-	padding:0px;
-	display:inline-block;
-	margin-top:5px;
-	overflow:hidden;
-}
-
-div.color:hover{
-			animation:hoverColor .25s;
-	-webkit-animation:hoverColor .25s;
-}
-div.color:active{
-			animation:clickColor .5s;
-	-webkit-animation:clickColor .5s;
-}
-
-@keyframes hoverColor 
-{
-0%   {transform:rotate(0deg);}
-33%  {transform:rotate(10deg);}
-66%  {transform:rotate(-10deg);}
-100% {transform:rotate(0deg);}
-}
-@-webkit-keyframes hoverColor /* Safari and Chrome */
-{
-0%   {-webkit-transform:rotate(0deg);}
-33%  {-webkit-transform:rotate(10deg);}
-66%  {-webkit-transform:rotate(-10deg);}
-100% {-webkit-transform:rotate(0deg);}
-}
-
-@keyframes clickColor 
-{
-0%   {transform:rotate(0deg);}
-33%  {transform:rotate(180deg);}
-66%  {transform:rotate(360deg);}
-100% {transform:rotate(0deg);}
-}
-@-webkit-keyframes clickColor /* Safari and Chrome */
-{
-0%   {-webkit-transform:rotate(0deg);}
-33%  {-webkit-transform:rotate(180deg);}
-66%  {-webkit-transform:rotate(360deg);}
-100% {-webkit-transform:rotate(0deg);}
 }
 
 #bkmsg{

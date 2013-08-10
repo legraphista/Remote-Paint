@@ -2,9 +2,31 @@ var cv;
 var cx;
 var lp = createPoint(-1,-1);
 var color = createColorRGBA(0,0,0,1);
-var lineW = 4;
+var lineW = 5;
 
 var pxMoved = 0;
+
+var lineWidthSizes = [2,5,10,15,20,25];
+
+function setLineWColor(){
+	for(var i = 0;i < lineWidthSizes.length; i++){
+		var e = document.getElementById("pen"+lineWidthSizes[i]);
+		e = e.getElementsByTagName("div")[0];
+		e.style.background = parseColor(color);
+	}
+}
+
+function setLineW(w){
+	lineW = w;
+	for(var i = 0;i < lineWidthSizes.length; i++){
+		var e = document.getElementById("pen"+lineWidthSizes[i]);
+		if(lineWidthSizes[i] == w){
+			e.className = "penCont penContSel";
+		}else{
+			e.className = "penCont";
+		}
+	}
+}
 
 function dist (p1,p2){
 	return Math.sqrt((p1.x - p2.x)*(p1.x - p2.x) + 
@@ -36,11 +58,11 @@ function gotData(_p,_lp,c,w){
 		cx.lineTo(_p.x, _p.y);
 		cx.stroke();
 		
-		cx.arc(_p.x, _p.y, w/2.0, 0, 2 * Math.PI, false);
+		cx.arc(_p.x, _p.y, (w-1)/2.0, 0, 2 * Math.PI, false);
 		cx.fillStyle = c;
 		cx.fill();
 		
-		cx.arc(_lp.x, _lp.y, w/2.0, 0, 2 * Math.PI, false);
+		cx.arc(_lp.x, _lp.y, (w-1)/2.0, 0, 2 * Math.PI, false);
 		cx.fillStyle = c;
 		cx.fill();
 	}
@@ -133,12 +155,15 @@ function clearCanvas()
 
 function setColorWithName(c){
 	color = createColorFromHTML(colorNameToHex(c));
+	setLineWColor();
 }
 function setColorWithRGBA(r, g, b, a){
 	color = createColorRGBA(r,g,b,a);
+	setLineWColor();
 } 
 function setColorWithHexCode(hexC){
 	color = createColorFromHTML(hexC);
+	setLineWColor();
 }
 
 function createColorFromHTML(cc){

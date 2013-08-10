@@ -10,6 +10,7 @@
 		<script src="script.js"></script>
 		<title>Remote-Paint</title>
 		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="colorsAndPenW.css" media="screen" />
  
 	</head>
 	<body>
@@ -19,6 +20,33 @@
 	</div>
 	
 	<div class="colorContainer">
+		<div class="penCont" id="pen2" onClick = "setLineW(2);">
+			<div class="penCirc penC2">
+			</div>
+		</div>
+		<div class="penCont penContSel" id="pen5" onClick = "setLineW(5);">
+			<div class="penCirc penC5">
+			</div>
+		</div>
+		<div class="penCont" id="pen10" onClick = "setLineW(10);">
+			<div class="penCirc penC10">
+			</div>
+		</div>
+		<div class="penCont" id="pen15" onClick = "setLineW(15);">
+			<div class="penCirc penC15">
+			</div>
+		</div>
+		<div class="penCont" id="pen20" onClick = "setLineW(20);">
+			<div class="penCirc penC20">
+			</div>
+		</div>
+		<div class="penCont" id="pen25" onClick = "setLineW(25);">
+			<div class="penCirc penC25">
+			</div>
+		</div>
+	
+		<div class="spacer"></div>
+	
 		<div class="color" style="background-color:rgba(255, 255, 255, 0.8);" onClick="sendClear();">
 			<div class="none_line"></div>
 		</div>
@@ -40,7 +68,7 @@
 	<div class="savePng">
 		<p class="savePng" onclick="SavePNG()">Salvează imaginea</p>
 	</div>
-	<canvas id='canv' height="550px" width="550px"></canvas>
+	<canvas id='canv' height="500px" width="500px"></canvas>
 	
 	
 	<div id="bkmsg">
