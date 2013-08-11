@@ -249,7 +249,7 @@ sockIOconns.sockets.on('connection', function (socket) {
 	function setUpDeliveryComms(){
 	
 		myClient.delivery.on('receive.success',function(file){
-			if(myClient.room === 'undefined') return;
+			if(typeof myClient.room === 'undefined') return;
 			
 			fs.writeFile("./imgs/" + myClient.room.ID + "-uc.png",file.buffer, function(err){
 				if(err){

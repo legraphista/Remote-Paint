@@ -59,16 +59,21 @@ function showUploadFile()
 
 var delivery = new Delivery(socket);
 
+function hideUploadImage(){
+	document.getElementById("cvBackImg").style.display = "block";
+	document.getElementById("div_setimg").style.display = "none";
+	document.getElementById("bkmsg").style.display = "none";
+}
 delivery.on('receive.success',function(file){
 	if (file.isImage()) {
 		document.getElementById("cvBackImg").src = file.dataURL();
-		document.getElementById("cvBackImg").style.display = "block";
-		document.getElementById("div_setimg").style.display = "none";
-		document.getElementById("bkmsg").style.display = "none";
+		hideUploadImage();
 	};
 });
 
 function sendImageToServer(){
+	if(typeof document.getElementById("file_img").files[0] === 'undefined') return;
+	
 	var file = document.getElementById("file_img").files[0];
 	delivery.send(file);
 

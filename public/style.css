@@ -84,6 +84,23 @@ p.listItemText{
 	margin-left:5px;
 }
 
+p.close{
+	color:red;
+	position:absolute;
+	font-size: 20px;
+	font-family:Verdana;
+	top:0px;
+	left:100%;
+	margin-left:-20px;
+	margin-top:0px;
+}
+p.close:active{
+	cursor:pointer;
+}
+p.close:hover{
+	cursor:pointer;
+}
+
 
 div.uplPng{
 	background-color:white;
