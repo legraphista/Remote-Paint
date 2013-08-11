@@ -29,6 +29,15 @@ window.onload = function () {
 				}	
 
 
+function showLoading(){
+	document.getElementById("bkmsg").style.display = "block";
+	document.getElementById("div_load").style.display = "block";
+}
+function hideLoading(){
+	document.getElementById("bkmsg").style.display = "none";
+	document.getElementById("div_load").style.display = "none";
+}
+				
 function getRID(){
 	if(URLVars.rid){
 		_rid = URLVars.rid;

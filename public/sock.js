@@ -67,7 +67,7 @@ function hideUploadImage(){
 delivery.on('receive.success',function(file){
 	if (file.isImage()) {
 		document.getElementById("cvBackImg").src = file.dataURL();
-		hideUploadImage();
+		hideLoading();
 	};
 });
 
@@ -76,5 +76,6 @@ function sendImageToServer(){
 	
 	var file = document.getElementById("file_img").files[0];
 	delivery.send(file);
-
+	hideUploadImage();
+	showLoading();
 }
