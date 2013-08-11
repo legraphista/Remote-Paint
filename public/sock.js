@@ -15,6 +15,8 @@ function sendClear(){
 }
 socket.on('clearCanvas', function(){
 	clearCanvas();
+	document.getElementById("cvBackImg").style.display = "none";
+	document.getElementById("cvBackImg").src = '';
 });
 
 function send(p,lp,c,w){
@@ -47,4 +49,27 @@ function roomHasPass(rid){
 		roomHasPassword = data.HP;
 		gotRoomPassMSG = true;
 	});
+}
+
+function showUploadFile()
+{
+	document.getElementById("div_setimg").style.display = "block";
+	document.getElementById("bkmsg").style.display = "block";
+}
+
+var delivery = new Delivery(socket);
+
+delivery.on('receive.success',function(file){
+	if (file.isImage()) {
+		document.getElementById("cvBackImg").src = file.dataURL();
+		document.getElementById("cvBackImg").style.display = "block";
+		document.getElementById("div_setimg").style.display = "none";
+		document.getElementById("bkmsg").style.display = "none";
+	};
+});
+
+function sendImageToServer(){
+	var file = document.getElementById("file_img").files[0];
+	delivery.send(file);
+
 }

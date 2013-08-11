@@ -12,6 +12,7 @@ module.exports = {
         var client = {};
 		client.name = name;
         client.socket = socket;
+		client.delivery = '';
         client.room = undefined;
 		client.color = {"r":0,
 						"g":0,

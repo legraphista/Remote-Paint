@@ -7,7 +7,27 @@ body{
 	background: 	    radial-gradient(50px 50px,ellipse farthest-corner, #ADADAD,#000000);
 }
 
+img.backImg{
+	position:absolute;
+	top:0px;
+	left:0px;
+	/*
+	width:500px;
+	height:500px;
+	*/
+	width: auto;
+	height : auto;
+	max-height: 100%;
+	max-width: 100%;
+}
 #canv{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:500px;
+	height:500px;
+}
+div.canvContainer{
 	margin:0px;
 	padding:0px;
 	
@@ -64,6 +84,36 @@ p.listItemText{
 	margin-left:5px;
 }
 
+
+div.uplPng{
+	background-color:white;
+	margin:0px;
+	padding:0px;
+	
+	position:absolute;
+	top:50%;
+	left:50%;
+	width:150px;
+	height:25px;
+	margin-top:+225px;
+	
+	border-bottom-right-radius: 15px;
+	border-bottom-left-radius: 15px;
+	box-shadow: 0px 0px 50px black;
+}
+p.uplPng{
+	margin-top:0px;
+	margin-right:0px;
+	text-align:center;
+	color:blue;
+}
+p.uplPng:active{
+	cursor:pointer;
+}
+p.uplPng:hover{
+	cursor:pointer;
+}
+
 div.savePng{
 	background-color:white;
 	margin:0px;
@@ -72,10 +122,10 @@ div.savePng{
 	position:absolute;
 	top:50%;
 	left:50%;
-	width:200px;
+	width:150px;
 	height:25px;
 	margin-top:+225px;
-	margin-left:+150px;
+	margin-left:+200px;
 	
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
@@ -83,8 +133,8 @@ div.savePng{
 }
 p.savePng{
 	margin-top:0px;
-	margin-right:25px;
-	text-align:right;
+	margin-right:0px;
+	text-align:center;
 	color:blue;
 }
 p.savePng:active{
@@ -102,7 +152,7 @@ div.share{
 	position:absolute;
 	top:50%;
 	left:50%;
-	width:200px;
+	width:80px;
 	height:25px;
 	margin-top:+225px;
 	margin-left:-150px;
@@ -113,7 +163,8 @@ div.share{
 }
 p.share{
 	margin-top:0px;
-	margin-left:25px;
+	margin-left:0px;
+	text-align:center;
 	color:blue;
 }
 p.share:active{
@@ -153,8 +204,10 @@ img.loading{
 	margin-left:-12px;
 }
 
+#div_setimg{
+	display:none;
+}
 #div_setrid{
-	
 }
 #div_setname{
 	display:none;

@@ -8,6 +8,11 @@ var close_timeout = 20;//60
 var io = require('socket.io');
 var connect = require('connect');
 
+var dl  = require('delivery');
+var fs  = require('fs');
+
+var gm = require('gm');
+
 var constructs = require('./scripts/constructors.js');
 var assets = require('./scripts/extra.js');
 
@@ -38,6 +43,8 @@ sockIOconns.sockets.on('connection', function (socket) {
         //daca nu mai este setat deja
         if (typeof myClient === 'undefined') {
             myClient = constructs.createClient(data.name, socket, constructs.createColor(0, 0, 0, 1));
+			myClient.delivery = dl.listen(socket);
+			setUpDeliveryComms();
 			socket.emit('nameSet');
         }
     });
@@ -54,6 +61,7 @@ sockIOconns.sockets.on('connection', function (socket) {
 				if (neighbours[i].disconnected == true) continue;
 				neighbours[i].socket.emit('clearCanvas',{});
 			}
+		fs.unlink("./imgs/" + myClient.room.ID + ".png");
 	});
 	
     socket.on('disconnect', function () {
@@ -65,6 +73,7 @@ sockIOconns.sockets.on('connection', function (socket) {
 			//daca camera e goala o sterg din lista de camere
 			if (myClient.room.clients.length == 0) {
 				RIDs.remove(myClient.room.ID);
+				fs.unlink("./imgs/" + myClient.room.ID + ".png");
 				rooms.remove(myClient.room);
 				delete myClient.room;
 			}
@@ -116,6 +125,8 @@ sockIOconns.sockets.on('connection', function (socket) {
                     rooms[i].clients.push(myClient);
                     myClient.room = rooms[i];
                     didJoin(true, "");
+					
+					sendFiletoClient(myClient,"./imgs/" + myClient.room.ID + ".png"); 
                 } else {
                     //TODO trimite parola gresita
 					myClient.room = rooms[i];
@@ -137,7 +148,7 @@ sockIOconns.sockets.on('connection', function (socket) {
 		
         didJoin(true, "");
 		
-		
+		sendFiletoClient(myClient,"./imgs/" + myClient.room.ID + ".png"); 
     });
 
     //  data.c - culoare ; data.p punct ; data.lp punct anterior ; data.w latimeLinie
@@ -233,5 +244,49 @@ sockIOconns.sockets.on('connection', function (socket) {
 			
 			neighbours[i].socket.emit('nameList', nameArr);
 		}
+	}
+	
+	function setUpDeliveryComms(){
+	
+		myClient.delivery.on('receive.success',function(file){
+			if(myClient.room === 'undefined') return;
+			
+			fs.writeFile("./imgs/" + myClient.room.ID + "-uc.png",file.buffer, function(err){
+				if(err){
+					console.log('error writing file ' + "./imgs/" + myClient.room.ID + "-uc.png");
+				}else{
+					assets.resizeImage(gm,
+									   "./imgs/" + myClient.room.ID + "-uc.png",
+									   "./imgs/" + myClient.room.ID + ".png",
+									   function(){
+											brodcastImageToRoom(myClient.room);
+											fs.unlink("./imgs/" + myClient.room.ID + "-uc.png");
+										}
+									   );
+					
+				}
+			});
+		});
+	}
+	
+	function brodcastImageToRoom(room){
+		var filename = "./imgs/" + room.ID + ".png";
+
+		for(var i = 0; i < room.clients.length; i++){
+			
+			sendFiletoClient(room.clients[i],filename);
+		}
+
+	}
+	
+	function sendFiletoClient(client,filename){
+		fs.exists(filename, function (exists) {
+			if(exists){
+				client.delivery.send({
+					name: 'img.png',
+					path : filename
+				});
+			}
+		});
 	}
 });

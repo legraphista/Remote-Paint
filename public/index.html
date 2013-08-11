@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8"><!--DOTO modifica adresa cand publici -->
 		<script src="http://192.168.0.109:8888/socket.io/socket.io.js"></script>
+		<script src="delivery.js"></script>
 		<script src="sock.js"></script>
 		<script src="draw.js"></script>
 		<script src="canvasSave.js"></script>
@@ -68,11 +69,28 @@
 	<div class="savePng">
 		<p class="savePng" onclick="SavePNG()">Salvează imaginea</p>
 	</div>
-	<canvas id='canv' height="500px" width="500px"></canvas>
+	<div class="uplPng">
+		<p class="uplPng" onclick="showUploadFile()">Încarcă imagine</p>
+	</div>
 	
-	
+	<div class="canvContainer">
+		<img id="cvBackImg" class="backImg">
+		<canvas id='canv' height="500px" width="500px"></canvas>
+	</div>
+
 	<div id="bkmsg">
 		<div class="msg">			
+		
+		
+			<div id="div_setimg">
+
+				<center>
+					<p class="msgTitle">Incărcați o imagine:</p>
+				</center>
+				
+				<input type="file" id="file_img" accept="image/*"></input>
+				<button class="button" id="file_OK" onClick="sendImageToServer();">Ok</button>
+			</div>
 		
 			<div id="div_setrid">
 

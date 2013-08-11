@@ -41,6 +41,20 @@ module.exports = {
 		if(typeof c.b === 'undefined') return false;
 		if(typeof c.a === 'undefined') return false;		
 		return true;
+	},
+	//THIS USES ImageMagic/ Download at ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/windows/
+	resizeImage: function(gm, fn, nfn, callback){
+		gm(fn)
+					.resize(500, 500)
+					.noProfile()
+					.write(nfn, function (err) {
+						if (err){ 
+							console.log(err);
+						}
+						else{
+							callback();
+						}
+				});
 	}
 }
 //extensie pt math ransom

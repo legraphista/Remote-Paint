@@ -35,8 +35,29 @@ function dist (p1,p2){
 
 function SavePNG(){
 	//adresa aici
-	var cs = new CanvasSaver('http://stefandev.net:8889/saveImg.php')
-	cs.savePNG(cv,'img');
+	var cs = new CanvasSaver('http://stefandev.net:8889/saveImg.php');
+	
+	var drawingURI = cv.toDataURL();
+	var backimg = document.getElementById("cvBackImg").src;
+	
+	clearCanvas();
+	
+	if(backimg != ''){
+		cx.drawImage(document.getElementById("cvBackImg"),0,0); 
+	}
+	
+	var img = new Image();
+	img.src = drawingURI;
+
+	img.onload = function(){
+		cx.drawImage(img,0,0);
+	
+		cs.savePNG(cv,'img');
+		
+		clearCanvas();
+		
+		cx.drawImage(img,0,0);
+	}
 }
 
 function gotData(_p,_lp,c,w){
@@ -79,7 +100,7 @@ document.onmousedown=function(e){
 		var x = e.offsetX || e.layerX;
 		var y = e.offsetY || e.layerY;
 		var p = createPoint(x,y);
-		send(p,lp,color);
+		send(p,lp,color,lineW);
 		lp = p;
 	}
 };
@@ -116,7 +137,7 @@ document.addEventListener('touchstart', function(e){
 			var x = e.offsetX || e.layerX;
 			var y = e.offsetY || e.layerY;
 			var p = createPoint(x,y);
-			send(p,lp,color);
+			send(p,lp,color,lineW);
 			lp = p;
 		}
 		return true;
