@@ -1,5 +1,5 @@
 						//server address
-var socket = io.connect('http://192.168.0.109:8888');
+var socket = io.connect('http://localhost:8888');
 
 function setName(name){
 	socket.emit('who',{"name":name});
@@ -15,8 +15,8 @@ function sendClear(){
 }
 socket.on('clearCanvas', function(){
 	clearCanvas();
-	document.getElementById("cvBackImg").style.display = "none";
-	document.getElementById("cvBackImg").src = '';
+	//document.getElementById("cvBackImg").style.display = "none";
+	//document.getElementById("cvBackImg").src = '';
 });
 
 function send(p,lp,c,w){

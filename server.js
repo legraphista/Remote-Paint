@@ -61,7 +61,7 @@ sockIOconns.sockets.on('connection', function (socket) {
 				if (neighbours[i].disconnected == true) continue;
 				neighbours[i].socket.emit('clearCanvas',{});
 			}
-		fs.unlink("./imgs/" + myClient.room.ID + ".png");
+		//fs.unlink("./imgs/" + myClient.room.ID + ".png");
 	});
 	
     socket.on('disconnect', function () {

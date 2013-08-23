@@ -39,18 +39,18 @@ function hideLoading(){
 }
 				
 function getRID(){
-	if(URLVars.rid){
+	//if(URLVars.rid){
 		_rid = URLVars.rid;
 		
 		getName();
-	}else{
-		document.getElementById("text_rid").focus();
-		document.getElementById("RID_OK").onclick = function(){
-			_rid = document.getElementById("text_rid").value;
-			
-			getName();
-		}
-	}
+	//}else{
+	//	document.getElementById("text_rid").focus();
+	//	document.getElementById("RID_OK").onclick = function(){
+	//		_rid = document.getElementById("text_rid").value;
+	//		
+	//		getName();
+	//	}
+	//}
 }			
 				
 function getName(){
