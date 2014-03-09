@@ -20,66 +20,74 @@
 		
 	</div>
 	
-	<div class="colorContainer">
-		<div class="penCont" id="pen2" onClick = "setLineW(2);">
-			<div class="penCirc penC2">
-			</div>
-		</div>
-		<div class="penCont penContSel" id="pen5" onClick = "setLineW(5);">
-			<div class="penCirc penC5">
-			</div>
-		</div>
-		<div class="penCont" id="pen10" onClick = "setLineW(10);">
-			<div class="penCirc penC10">
-			</div>
-		</div>
-		<div class="penCont" id="pen15" onClick = "setLineW(15);">
-			<div class="penCirc penC15">
-			</div>
-		</div>
-		<div class="penCont" id="pen20" onClick = "setLineW(20);">
-			<div class="penCirc penC20">
-			</div>
-		</div>
-		<div class="penCont" id="pen25" onClick = "setLineW(25);">
-			<div class="penCirc penC25">
-			</div>
-		</div>
+	<div class="main" id="mainDiv">
 	
-		<div class="spacer"></div>
-	
-		<div class="color" style="background-image: url('del_draw.png');" onClick="sendClear();">
-			<div class="none_line"></div>
-		</div>
-		<div class="color" style="background-image: url('del_img.png');" onClick="sendClearImg();">
-			<div class="none_line"></div>
+		<div class="colorContainer">
+			<div class="penCont" id="pen2" onClick = "setLineW(2);">
+				<div class="penCirc penC2">
+				</div>
+			</div>
+			<div class="penCont penContSel" id="pen5" onClick = "setLineW(5);">
+				<div class="penCirc penC5">
+				</div>
+			</div>
+			<div class="penCont" id="pen10" onClick = "setLineW(10);">
+				<div class="penCirc penC10">
+				</div>
+			</div>
+			<div class="penCont" id="pen15" onClick = "setLineW(15);">
+				<div class="penCirc penC15">
+				</div>
+			</div>
+			<div class="penCont" id="pen20" onClick = "setLineW(20);">
+				<div class="penCirc penC20">
+				</div>
+			</div>
+			<div class="penCont" id="pen25" onClick = "setLineW(25);">
+				<div class="penCirc penC25">
+				</div>
+			</div>
+		
+			<div class="spacer"></div>
+		
+			<div class="color" style="background-image: url('del_draw.png');" onClick="sendClear();">
+				<div class="none_line"></div>
+			</div>
+			<div class="color" style="background-image: url('del_img.png');" onClick="sendClearImg();">
+				<div class="none_line"></div>
+			</div>
+			
+			<div class="color" style="background-color:white;" onClick="setColorWithName('white')"></div>
+			<div class="color" style="background-color:gray;" onClick="setColorWithName('gray')"></div>
+			<div class="color" style="background-color:black;" onClick="setColorWithName('black')"></div>
+			<div class="color" style="background-color:yellow;" onClick="setColorWithName('yellow')"></div>
+			<div class="color" style="background-color:orange;" onClick="setColorWithName('orange')"></div>
+			<div class="color" style="background-color:red;" onClick="setColorWithName('red')"></div>
+			<div class="color" style="background-color:purple;" onClick="setColorWithName('purple')"></div>
+			<div class="color" style="background-color:blue;" onClick="setColorWithName('blue')"></div>
+			<div class="color" style="background-color:green;" onClick="setColorWithName('green')"></div>
+			
 		</div>
 		
-		<div class="color" style="background-color:white;" onClick="setColorWithName('white')"></div>
-		<div class="color" style="background-color:gray;" onClick="setColorWithName('gray')"></div>
-		<div class="color" style="background-color:black;" onClick="setColorWithName('black')"></div>
-		<div class="color" style="background-color:yellow;" onClick="setColorWithName('yellow')"></div>
-		<div class="color" style="background-color:orange;" onClick="setColorWithName('orange')"></div>
-		<div class="color" style="background-color:red;" onClick="setColorWithName('red')"></div>
-		<div class="color" style="background-color:purple;" onClick="setColorWithName('purple')"></div>
-		<div class="color" style="background-color:blue;" onClick="setColorWithName('blue')"></div>
-		<div class="color" style="background-color:green;" onClick="setColorWithName('green')"></div>
 		
-	</div>
-	
-	<div class="share">
-		<p class="share" onclick="shareRoom()">Invită</p>
-	</div>
-	<div class="savePng">
-		<p class="savePng" onclick="SavePNG()">Salvează imaginea</p>
-	</div>
-	<div class="uplPng">
-		<p class="uplPng" onclick="showUploadFile()">Încarcă imagine</p>
-	</div>
-	
-	<div class="canvContainer">
-		<img id="cvBackImg" class="backImg">
-		<canvas id='canv' height="500px" width="500px"></canvas>
+		
+		<div class="canvContainer">
+			
+			<div class="share">
+				<p class="share" onclick="shareRoom()">Invită</p>
+			</div>
+			<div class="savePng">
+				<p class="savePng" onclick="SavePNG()">Salvează imaginea</p>
+			</div>
+			<div class="uplPng">
+				<p class="uplPng" onclick="showUploadFile()">Încarcă imagine</p>
+			</div>
+			
+			<div class="innerCanvContainer">
+				<img id="cvBackImg" class="backImg">
+				<canvas id='canv' height="500px" width="500px"></canvas>
+			</div>
+		</div>
 	</div>
 
 	<div id="bkmsg">

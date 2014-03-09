@@ -2,9 +2,9 @@ div.colorContainer{
 	position:absolute;
 	top:100%;
 	margin-top: -45px;
-	left:200px;
+	left:0px;
 	height:45px;
-	width:calc(100% - 200px);
+	width:100%;
 	text-align:center;
 	z-index:1;
 	

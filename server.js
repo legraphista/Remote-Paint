@@ -43,7 +43,7 @@ sockIOconns.sockets.on('connection', function (socket) {
     socket.on('who', function (data) {
         //daca nu mai este setat deja
         if (typeof myClient === 'undefined') {
-            myClient = constructs.createClient(data.name, socket, constructs.createColor(0, 0, 0, 1));
+            myClient = constructs.createClient(assets.escapeJS(data.name), socket, constructs.createColor(0, 0, 0, 1));
 			myClient.delivery = dl.listen(socket);
 			setUpDeliveryComms();
 			socket.emit('nameSet');

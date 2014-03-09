@@ -7,6 +7,14 @@ body{
 	background: 	    radial-gradient(50px 50px,ellipse farthest-corner, #ADADAD,#000000);
 }
 
+div.main{
+	position:absolute;
+	top:0px;
+	left:200px;
+	height:100%;
+	width:calc(100% - 200px);
+}
+
 img.backImg{
 	position:absolute;
 	top:0px;
@@ -35,7 +43,7 @@ div.canvContainer{
 	top:50%;
 	left:50%;
 	margin-top:-275px;
-	margin-left:-150px;
+	margin-left:-250px;
 	
 	height:500px;
 	width:500px;
@@ -49,6 +57,16 @@ div.canvContainer{
 	background: white;
 
 }
+div.innerCanvContainer{
+	margin:0px;
+	padding:0px;
+	height:500px;
+	width:500px;
+	box-shadow: 0px 0px 50px black;
+	
+	background: white;
+}
+
 div.nameList{
 	position:absolute;
 	top:0px;
@@ -57,6 +75,8 @@ div.nameList{
 	width:200px;
 	background-color:rgba(255,255,255,0.9);
 	z-index:2;
+	overflow-y: scroll;
+	overflow-x: hidden;
 }
 div.listItem{
 	height:25px;
@@ -114,11 +134,13 @@ div.uplPng{
 	left:50%;
 	width:150px;
 	height:25px;
-	margin-top:+225px;
-	
+	margin-top:+250px;
+	margin-left:-110px;
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
 	box-shadow: 0px 0px 50px black;
+	
+	z-index: -1;
 }
 p.uplPng{
 	margin-top:0px;
@@ -143,12 +165,14 @@ div.savePng{
 	left:50%;
 	width:150px;
 	height:25px;
-	margin-top:+225px;
-	margin-left:+200px;
+	margin-top:+250px;
+	margin-left:+100px;
 	
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
 	box-shadow: 0px 0px 50px black;
+	
+	z-index: -1;
 }
 p.savePng{
 	margin-top:0px;
@@ -173,12 +197,14 @@ div.share{
 	left:50%;
 	width:80px;
 	height:25px;
-	margin-top:+225px;
-	margin-left:-150px;
+	margin-top:+250px;
+	margin-left:-250px;
 	
 	border-bottom-right-radius: 15px;
 	border-bottom-left-radius: 15px;
 	box-shadow: 0px 0px 50px black;
+	
+	z-index: -1;
 }
 p.share{
 	margin-top:0px;

@@ -55,6 +55,9 @@ module.exports = {
 							callback();
 						}
 				});
+	},
+	escapeJS: function(text){
+		return text.replace(/</g,"&lt;").replace(/>/g,"&gt;");
 	}
 }
 //extensie pt math ransom

@@ -24,10 +24,41 @@ window.onload = function () {
 						}
 					}
 					
-					
+					scaleCanvas();
 					getRID();					
 				}	
-
+window.onresize=function(){
+	scaleCanvas();
+};
+function scaleCanvas(){
+	var canvas = document.getElementsByClassName("canvContainer")[0];
+	
+	//scale y
+	var designedWh = 667;
+	var designedCh = 500;
+	
+	var newWh = window.innerHeight;
+	var newCh = designedCh / designedWh * newWh;
+	//scale x
+	var designedWw = 1366;
+	var designedCw = 500;
+	
+	var newWw = window.innerWidth;
+	var newCw = designedCw / designedWw * newWw;
+	//
+		
+	var scaleFactorH = newCh/designedCh;
+	var scaleFactorW = newCw/designedCw;
+	
+	//var scaleFactor = scaleFactorW > scaleFactorH ? scaleFactorH : scaleFactorW;
+	var scaleFactor = scaleFactorH;
+	
+	canvas.style.transform = 'scale(' + scaleFactor + ')';
+	canvas.style['-o-transform'] = 'scale(' + scaleFactor + ')';
+	canvas.style['-webkit-transform'] = 'scale(' + scaleFactor + ')';
+	canvas.style['-moz-transform'] = 'scale(' + scaleFactor + ')';
+}
+				
 
 function showLoading(){
 	document.getElementById("bkmsg").style.display = "block";
