@@ -28,6 +28,21 @@ div.none_line{
 	margin-left:-8px;
 	margin-top:-2px;
 }
+
+div.none_line_img{
+	position:relative;
+	top:50%;
+	left:0px;
+	width:45px;
+	height:3px;
+	background:rgba(0, 0, 255, 0.8);
+	transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	margin-left:-8px;
+	margin-top:-2px;
+}
 div.color{
 	height:30px;
 	width:30px;

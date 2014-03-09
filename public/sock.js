@@ -1,5 +1,5 @@
 						//server address
-var socket = io.connect('http://localhost:8888');
+var socket = io.connect('http://stefandev.net:8888');
 
 function setName(name){
 	socket.emit('who',{"name":name});
@@ -13,8 +13,17 @@ function enterRoom(rid,pass)
 function sendClear(){
 	socket.emit('sendClear',{});
 }
+function sendClearImg(){
+	socket.emit('sendClearImg',{});
+}
+
 socket.on('clearCanvas', function(){
 	clearCanvas();
+	//document.getElementById("cvBackImg").style.display = "none";
+	//document.getElementById("cvBackImg").src = '';
+});
+socket.on('clearCanvasImg', function(){
+	clearCanvasImg();
 	//document.getElementById("cvBackImg").style.display = "none";
 	//document.getElementById("cvBackImg").src = '';
 });

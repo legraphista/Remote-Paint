@@ -1,5 +1,6 @@
 var port = 8888;
 var socketIOLogLevel = 2;
+var debug = true;
 
 var heartbeat_interval = 10//25
 var heartbeat_timeout = 15;//60
@@ -53,6 +54,8 @@ sockIOconns.sockets.on('connection', function (socket) {
 		if(typeof myClient === 'undefined') return;
 		if(typeof myClient.room === 'undefined') return;
 		
+		if(debug)console.log("ROOM: sendClear pt. RoomID: " + myClient.room.ID);
+		
 		var neighbours = myClient.room.clients;
 			for (var i = 0; i < neighbours.length; i++) {
 				//daca socketul e nul
@@ -63,17 +66,35 @@ sockIOconns.sockets.on('connection', function (socket) {
 			}
 		//fs.unlink("./imgs/" + myClient.room.ID + ".png");
 	});
+	socket.on('sendClearImg', function(){
+		if(typeof myClient === 'undefined') return;
+		if(typeof myClient.room === 'undefined') return;
+		
+		if(debug)console.log("ROOM: sendClear pt. RoomID: " + myClient.room.ID);
+		
+		var neighbours = myClient.room.clients;
+			for (var i = 0; i < neighbours.length; i++) {
+				//daca socketul e nul
+				if (!neighbours[i] || typeof neighbours[i] === 'undefined') continue;
+				//daca socketul este deconectat
+				if (neighbours[i].disconnected == true) continue;
+				neighbours[i].socket.emit('clearCanvasImg',{});
+			}
+		fs.unlink("./imgs/" + myClient.room.ID + ".png");
+	});
 	
     socket.on('disconnect', function () {
 		if(typeof myClient === 'undefined') return;
-        //me sterg din camera
+        //ma sterg din camera
 		if(typeof myClient.room !== 'undefined'){
 			myClient.room.clients.remove(myClient);
 			sendNameList('');
 			//daca camera e goala o sterg din lista de camere
 			if (myClient.room.clients.length == 0) {
 				RIDs.remove(myClient.room.ID);
+				if(debug) console.log("ROOM: camera stearsa : " + myClient.room.ID);
 				fs.unlink("./imgs/" + myClient.room.ID + ".png");
+				if(debug) console.log("FILE: img stearsa : "  + "./imgs/" + myClient.room.ID + ".png");
 				rooms.remove(myClient.room);
 				delete myClient.room;
 			}
@@ -114,7 +135,7 @@ sockIOconns.sockets.on('connection', function (socket) {
             didJoin(false, "Protocol nerespectat (e1)");
             return;
         }
-		
+		if(debug)console.log("CLIENT: Join");
         //pt fiecare camera
         for (var i = 0; i < rooms.length; i++) {
             //daca gasim camera
@@ -125,13 +146,14 @@ sockIOconns.sockets.on('connection', function (socket) {
                     rooms[i].clients.push(myClient);
                     myClient.room = rooms[i];
                     didJoin(true, "");
-					
+					if(debug)console.log("CLIENT: se insereaza in camera: " + myClient.room.ID);
 					sendFiletoClient(myClient,"./imgs/" + myClient.room.ID + ".png"); 
+					if(debug)console.log("CLIENT: se trimite imagine");
                 } else {
                     //TODO trimite parola gresita
 					myClient.room = rooms[i];
                     didJoin(false, "Parola gresita");
-					
+					if(debug)console.log("ROOM: parola gresita");
                 }
 				
                 return; //am incercat camera
@@ -140,12 +162,13 @@ sockIOconns.sockets.on('connection', function (socket) {
         //dupa ce am incercat toate camerele, creem una noua
         //TODO crearea unei camere
 		
+		if(debug) console.log("ROOM: se creeaza camera");
         var room = constructs.createRoom(data.password, assets.generateRID(RIDs));
         RIDs.push(room.ID);
         room.clients.push(myClient);
         myClient.room = room;
         rooms.push(room);
-		
+		if(debug) console.log("ROOM: id nou : " + room.ID); 
         didJoin(true, "");
 		
 		sendFiletoClient(myClient,"./imgs/" + myClient.room.ID + ".png"); 
@@ -251,14 +274,18 @@ sockIOconns.sockets.on('connection', function (socket) {
 		myClient.delivery.on('receive.success',function(file){
 			if(typeof myClient.room === 'undefined') return;
 			
+			if(debug) console.log("FILE: primit imagine, se salveaza");
+			
 			fs.writeFile("./imgs/" + myClient.room.ID + "-uc.png",file.buffer, function(err){
 				if(err){
 					console.log('error writing file ' + "./imgs/" + myClient.room.ID + "-uc.png");
 				}else{
+					if(debug) console.log("FILE: procesare imagine");
 					assets.resizeImage(gm,
 									   "./imgs/" + myClient.room.ID + "-uc.png",
 									   "./imgs/" + myClient.room.ID + ".png",
 									   function(){
+											if(debug) console.log("FILE: procesare terminata");
 											brodcastImageToRoom(myClient.room);
 											fs.unlink("./imgs/" + myClient.room.ID + "-uc.png");
 										}
@@ -271,9 +298,8 @@ sockIOconns.sockets.on('connection', function (socket) {
 	
 	function brodcastImageToRoom(room){
 		var filename = "./imgs/" + room.ID + ".png";
-
+		if(debug) console.log("FILE: broadcast imagine");
 		for(var i = 0; i < room.clients.length; i++){
-			
 			sendFiletoClient(room.clients[i],filename);
 		}
 

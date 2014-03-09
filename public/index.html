@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8"><!--DOTO modifica adresa cand publici -->
-		<script src="http://localhost:8888/socket.io/socket.io.js"></script>
+		<script src="http://stefandev.net:8888/socket.io/socket.io.js"></script>
 		<script src="delivery.js"></script>
 		<script src="sock.js"></script>
 		<script src="draw.js"></script>
@@ -48,9 +48,13 @@
 	
 		<div class="spacer"></div>
 	
-		<div class="color" style="background-color:rgba(255, 255, 255, 0.8);" onClick="sendClear();">
+		<div class="color" style="background-image: url('del_draw.png');" onClick="sendClear();">
 			<div class="none_line"></div>
 		</div>
+		<div class="color" style="background-image: url('del_img.png');" onClick="sendClearImg();">
+			<div class="none_line"></div>
+		</div>
+		
 		<div class="color" style="background-color:white;" onClick="setColorWithName('white')"></div>
 		<div class="color" style="background-color:gray;" onClick="setColorWithName('gray')"></div>
 		<div class="color" style="background-color:black;" onClick="setColorWithName('black')"></div>
@@ -91,7 +95,7 @@
 				<input type="file" id="file_img" accept="image/*"></input>
 				<button class="button" id="file_OK" onClick="sendImageToServer();">Ok</button>
 			</div>
-		
+			
 			<div id="div_setrid">
 
 				<center>

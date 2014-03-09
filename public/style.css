@@ -40,11 +40,13 @@ div.canvContainer{
 	height:500px;
 	width:500px;
 	box-shadow: 0px 0px 50px black;
-	
+	/*
 	background: -webkit-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
 	background:    	-ms-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
 	background:    -moz-radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
 	background: 	    radial-gradient(50% 50%,circle farthest-corner, rgba(255,255,255,1), rgba(255,255,255,0.9));
+	*/
+	background: white;
 
 }
 div.nameList{
