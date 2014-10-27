@@ -123,8 +123,9 @@ document.onmousemove=function(e){
 
 //TOUCH SUPPORT
 document.addEventListener('touchstart', function(e){ 
-	var x = event.touches[0].pageX - cv.offsetLeft;
-	var y = event.touches[0].pageY - cv.offsetTop;
+    var offset = cv.getBoundingClientRect();
+	var x = event.touches[0].pageX - offset.left;
+	var y = event.touches[0].pageY - offset.top;
 	
 	
 	
@@ -150,8 +151,10 @@ document.addEventListener('touchend',function(event) {
 	return true;
 });
 window.addEventListener('touchmove',function(e) {
-	var x = event.touches[0].pageX - cv.offsetLeft;
-	var y = event.touches[0].pageY - cv.offsetTop;
+    var offset = cv.getBoundingClientRect();
+	var x = event.touches[0].pageX - offset.left;
+	var y = event.touches[0].pageY - offset.top;
+	
 	if(x >= 0 && y >= 0 && x <= 550 && y <= 550){
 		if(mouseDwn && ((e.target == document.getElementById('canv')) || (e.target.id == document.getElementById('canv').id))){
 			var p = createPoint(x,y);
