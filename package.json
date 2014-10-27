@@ -1,0 +1,11 @@
+{
+  "name": "Remote-Paint",
+  "version": "1.0.1",
+  "description": "",
+  "dependencies": {
+    "connect": "2.7.11",
+    "delivery": "0.0.3",
+    "gm": "1.11.0",
+    "socket.io": "0.9.16"
+  }
+}
